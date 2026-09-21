@@ -1,1 +1,7 @@
+# Ambiente
 .env
+
+# Node
+node_modules/
+dist/
+*.local
