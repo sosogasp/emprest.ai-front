@@ -4,7 +4,7 @@
 |---|---|
 | fatia | nenhuma — `rules/` e `AGENTS.md`, sem `CA-xx` |
 | CA atendidos | nenhum; tarefa sem critério numerado, declarado conforme `rules/checks.md` passo 5 |
-| commits | um, só de regra (sem código) — o hash não cabe nesta tabela: escrevê-lo mudaria o arquivo que o commit inclui |
+| commits | backend `8b230c8` (espelho) · frontend: o commit desta tarefa, assunto `Adiciona as regras da casa e o contrato de operacao` — só de regra, sem código. O hash do frontend não cabe aqui: escrevê-lo mudaria o arquivo que ele mesmo inclui |
 | checks | `npm run lint` → `LINT_EXIT=0` · `npx tsc -b` → `TSC_EXIT=0` · `npm run build` → `✓ built in 1.40s`, `BUILD_EXIT=0` |
 
 ## Onde parei
