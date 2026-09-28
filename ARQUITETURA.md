@@ -7,6 +7,11 @@ lån/
 ├── backend/       # API (NestJS)
 ├── frontend/      # SPA (React + Vite)
 ├── docs/          # Documentação
+│   ├── PRD.md     # escopo do produto (itens 1–5 da v1)
+│   ├── layout.md  # especificação visual, seção por seção
+│   ├── adr/       # decisões de stack
+│   ├── specs/     # NNN-funcionalidade/ com spec.md, plan.md e tasks.md
+│   └── handoffs/  # AAAA-MM-DD-assunto.md, um por implementação
 └── .gitignore
 ```
 
