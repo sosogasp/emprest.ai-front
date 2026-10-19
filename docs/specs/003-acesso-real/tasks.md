@@ -5,4 +5,4 @@
 - [x] Dados e mutações persistentes com autorização implementados (CA-04, CA-05, CA-06); regras cobertas em testes, E2E de mutações ainda não observado.
 - [x] OpenAPI, Orval e integração visual (CA-07), build frontend aprovado.
 - [x] Checks, handoff e publicação verificada (CA-08); API retorna 401 sem sessão e login real confirmado pela usuária.
-- [ ] Ajuste de altura do login, verificação visual e publicação (CA-09).
+- [x] Ajuste de altura do login, verificação visual e publicação (CA-09): documento e viewport coincidem em produção em 1280×720; CSS publicado index-Cp-tO963.css. Local também validado em 1280×600 e 390×640.
