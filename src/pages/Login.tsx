@@ -19,7 +19,7 @@ const ESTATISTICAS = [
   { numero: '0', texto: 'linhas para preencher' },
 ]
 
-/** Login do layout.md §5.1: grade 1.05fr/0.95fr, altura mínima 820px. */
+/** Login do layout.md §5.1, adaptado à altura disponível da janela. */
 export default function Login() {
   const usuario = useAuth((s) => s.usuario)
   const [erro, setErro] = useState<string | null>(null)
@@ -53,13 +53,13 @@ export default function Login() {
   if (usuario) return <Navigate to={usuario.papel === 'Operações' ? '/operacoes' : '/'} replace />
 
   return (
-    <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', minHeight: '820px' }}>
+    <div className="login-layout">
       {/* Coluna esquerda: gradiente + brilho radial do acento */}
       <section
+        className="login-panel login-hero"
         style={{
           position: 'relative',
           overflow: 'hidden',
-          padding: '64px 56px',
           display: 'flex',
           flexDirection: 'column',
           background: 'linear-gradient(160deg, #1b1f2e, #161826 60%)',
@@ -86,7 +86,7 @@ export default function Login() {
             </span>
           </span>
         </div>
-        <div style={{ position: 'relative', marginTop: 'auto', maxWidth: 480 }}>
+        <div className="login-copy" style={{ position: 'relative', marginTop: 'auto', maxWidth: 480 }}>
           <h1 style={{ fontSize: 44 }}>
             Empréstimo de equipamentos
             <br />
@@ -98,9 +98,9 @@ export default function Login() {
           </p>
         </div>
         <div
+          className="login-stats"
           style={{
             position: 'relative',
-            display: 'flex',
             gap: 22.4,
             marginTop: 33.6,
             paddingTop: 16.8,
@@ -116,21 +116,21 @@ export default function Login() {
             </span>
           ))}
         </div>
-        <p style={{ position: 'relative', marginTop: 33.6, fontSize: 12, color: 'var(--t40)' }}>
+        <p className="login-footer" style={{ position: 'relative', marginTop: 33.6, fontSize: 12, color: 'var(--t40)' }}>
           Operações · TI interno
         </p>
       </section>
 
       {/* Coluna direita: coluna de 340px centralizada verticalmente */}
       <section
+        className="login-panel login-form-panel"
         style={{
           display: 'grid',
           placeItems: 'center',
-          padding: '64px 56px',
           background: 'var(--color-bg)',
         }}
       >
-        <div style={{ width: 340 }}>
+        <div className="login-form">
           <h2 style={{ fontSize: 26 }}>Entrar</h2>
           <p style={{ fontSize: 14, color: 'var(--t55)', marginTop: 5.6 }}>Use o e-mail corporativo.</p>
           <form

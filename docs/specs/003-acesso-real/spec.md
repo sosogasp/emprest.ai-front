@@ -22,6 +22,9 @@ Deriva do PRD itens 1–5 e do ADR-001. Complementa as fatias 001 e 002.
   cliente Orval, consumido com TanStack Query. Não há acesso direto ao banco no front.
 - CA-08: rotas diretas e recarregamento funcionam na Vercel; build e verificações
   passam antes da publicação. Nenhum segredo de backend é incluído no frontend.
+- CA-09 (pedido posterior da usuária): depois de confirmar o backend funcionando,
+  remover o mínimo fixo de 820px do login. A tela acompanha a altura da janela,
+  mantém o formulário acessível e se adapta a celular sem overflow horizontal.
 
 Provisionamento continua fechado por administrador: o sistema não cria usuários,
 tenants ou vínculos automaticamente. Ausência de provisionamento é bloqueio
