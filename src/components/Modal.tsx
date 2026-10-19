@@ -13,6 +13,7 @@ interface ModalProps {
   rotuloConfirmar: string
   onConfirmar: () => void
   onFechar: () => void
+  salvando?: boolean
 }
 
 /** Modal de 420px do layout.md §5.6: backdrop fecha por clique fora e por Esc. */
@@ -23,6 +24,7 @@ export function Modal({
   rotuloConfirmar,
   onConfirmar,
   onFechar,
+  salvando = false,
 }: ModalProps) {
   useEffect(() => {
     const aoTeclar = (e: KeyboardEvent) => {
@@ -59,8 +61,8 @@ export function Modal({
           <button type="button" className="btn btn-secondary" onClick={onFechar}>
             Cancelar
           </button>
-          <button type="button" className="btn btn-primary" onClick={onConfirmar}>
-            {rotuloConfirmar}
+          <button type="button" className="btn btn-primary" onClick={onConfirmar} disabled={salvando}>
+            {salvando ? 'Salvando…' : rotuloConfirmar}
           </button>
         </div>
       </div>

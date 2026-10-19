@@ -2,11 +2,9 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import { supabase } from '@/lib/supabase'
-import { iniciais as calcularIniciais } from '@/lib/format'
 import { useAuth } from '@/store/auth'
-import type { Papel } from '@/data/demo'
 
 const schema = z.object({
   email: z.string().min(1, 'Informe o e-mail').regex(/.+@.+\..+/, 'E-mail inválido'),
@@ -23,9 +21,7 @@ const ESTATISTICAS = [
 
 /** Login do layout.md §5.1: grade 1.05fr/0.95fr, altura mínima 820px. */
 export default function Login() {
-  const entrar = useAuth((s) => s.entrar)
-  const entrarDemo = useAuth((s) => s.entrarDemo)
-  const navigate = useNavigate()
+  const usuario = useAuth((s) => s.usuario)
   const [erro, setErro] = useState<string | null>(null)
 
   const {
@@ -34,14 +30,13 @@ export default function Login() {
     formState: { errors, isSubmitting },
   } = useForm<FormLogin>({ resolver: zodResolver(schema) })
 
-  function entrarCom(usuario: { nome: string; iniciais: string; papel: Papel; id: string }) {
-    entrar(usuario)
-    navigate(usuario.papel === 'Operações' ? '/operacoes' : '/')
-  }
-
   async function aoEntrar(valores: FormLogin) {
     setErro(null)
-    if (supabase) {
+    if (!supabase) {
+      setErro('O acesso está indisponível. A configuração de autenticação precisa ser concluída.')
+      return
+    }
+    try {
       const { error } = await supabase.auth.signInWithPassword({
         email: valores.email,
         password: valores.senha,
@@ -50,21 +45,12 @@ export default function Login() {
         setErro('E-mail ou senha inválidos.')
         return
       }
-      // Nome provisório derivado do e-mail — perfil completo chega com a API.
-      const apelido = valores.email.split('@')[0] ?? 'colaborador'
-      const nome = apelido.charAt(0).toUpperCase() + apelido.slice(1)
-      entrarCom({
-        id: `u:${valores.email}`,
-        nome,
-        iniciais: calcularIniciais(nome),
-        papel: 'Colaborador',
-      })
-      return
+    } catch {
+      setErro('Não foi possível conectar. Verifique sua conexão e tente novamente.')
     }
-    // Sem Supabase configurado: entra na demonstração com os dados do layout.md §9.
-    entrarDemo('Colaborador')
-    navigate('/')
   }
+
+  if (usuario) return <Navigate to={usuario.papel === 'Operações' ? '/operacoes' : '/'} replace />
 
   return (
     <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', minHeight: '820px' }}>
@@ -79,16 +65,16 @@ export default function Login() {
           background: 'linear-gradient(160deg, #1b1f2e, #161826 60%)',
         }}
       >
+        {/* Brilho radial de 520px deslocado para left:-160px; top:120px (layout.md §5.1) */}
         <div
           aria-hidden="true"
           style={{
             position: 'absolute',
             left: -160,
             top: 120,
-            width: 1040,
-            height: 1040,
-            background:
-              'radial-gradient(circle 520px at 50% 50%, rgba(47,184,172,0.16), transparent 70%)',
+            width: 520,
+            height: 520,
+            background: 'radial-gradient(circle at 50% 50%, rgba(47,184,172,0.16), transparent 70%)',
             pointerEvents: 'none',
           }}
         />
@@ -106,7 +92,8 @@ export default function Login() {
             <br />
             sem planilha.
           </h1>
-          <p style={{ fontSize: 16, color: 'var(--t62)', marginTop: 11.2 }}>
+          {/* Lead de 16px em 60% de opacidade (layout.md §5.1) */}
+          <p style={{ fontSize: 16, color: 'rgba(233, 233, 237, 0.6)', marginTop: 11.2 }}>
             Peça, devolva e acompanhe o que está com quem — direto pelo catálogo.
           </p>
         </div>
@@ -156,6 +143,7 @@ export default function Login() {
               <input
                 id="email"
                 type="email"
+                autoComplete="username"
                 className="input"
                 placeholder="nome@empresa.com"
                 {...register('email')}
@@ -169,6 +157,7 @@ export default function Login() {
               <input
                 id="senha"
                 type="password"
+                autoComplete="current-password"
                 className="input"
                 placeholder="••••••••"
                 {...register('senha')}
@@ -177,37 +166,16 @@ export default function Login() {
                 <span style={{ fontSize: 12, color: 'var(--state-late-fg)' }}>{errors.senha.message}</span>
               )}
             </div>
-            {erro && <p style={{ fontSize: 13, color: 'var(--state-late-fg)' }}>{erro}</p>}
-            {!supabase && (
-              <p style={{ fontSize: 12, color: 'var(--t45)' }}>
-                Supabase não configurado neste ambiente — o botão entra na demonstração.
-              </p>
-            )}
-            <button type="submit" className="btn btn-primary btn-tall btn-block" disabled={isSubmitting}>
+            {erro && <p role="alert" style={{ fontSize: 13, color: 'var(--state-late-fg)' }}>{erro}</p>}
+            {!supabase && <p role="alert">Autenticação não configurada. Contate o administrador.</p>}
+            <button type="submit" className="btn btn-primary btn-tall btn-block" disabled={isSubmitting || !supabase}>
               {isSubmitting ? 'Entrando…' : 'Entrar'}
-            </button>
-            <button
-              type="button"
-              className="btn btn-ghost"
-              onClick={() =>
-                entrarCom({ id: 'p6', nome: 'Operações', iniciais: 'OP', papel: 'Operações' })
-              }
-            >
-              Entrar como Operações →
-            </button>
-            <button
-              type="button"
-              className="btn btn-ghost"
-              onClick={() =>
-                entrarCom({ id: 'p1', nome: 'Ana Ribeiro', iniciais: 'AR', papel: 'Colaborador' })
-              }
-            >
-              Explorar demonstração (Ana Ribeiro) →
             </button>
             <p style={{ fontSize: 12, color: 'var(--t45)', marginTop: 2.8 }}>
               Cada pessoa vê apenas os próprios empréstimos.
             </p>
           </form>
+
         </div>
       </section>
     </div>

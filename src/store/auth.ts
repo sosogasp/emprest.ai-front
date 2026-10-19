@@ -1,31 +1,18 @@
 import { create } from 'zustand'
-import type { Papel } from '@/data/demo'
+import type { PerfilDto } from '@/api/gerado'
 
-export interface Usuario {
-  /** Identifica a pessoa nos dados (demo: p1 = Ana Ribeiro, p6 = Operações). */
-  id: string
-  nome: string
-  iniciais: string
-  papel: Papel
-}
+export type Usuario = PerfilDto
 
 interface AuthState {
   usuario: Usuario | null
-  entrarDemo: (papel: Papel) => void
-  entrar: (usuario: Usuario) => void
+  inicializando: boolean
+  definirSessao: (usuario: Usuario | null) => void
   sair: () => void
 }
 
 export const useAuth = create<AuthState>((set) => ({
   usuario: null,
-  /** Modo demonstração (fase de protótipo visual, dados do layout.md §9). */
-  entrarDemo: (papel) =>
-    set({
-      usuario:
-        papel === 'Operações'
-          ? { id: 'p6', nome: 'Operações', iniciais: 'OP', papel: 'Operações' }
-          : { id: 'p1', nome: 'Ana Ribeiro', iniciais: 'AR', papel: 'Colaborador' },
-    }),
-  entrar: (usuario) => set({ usuario }),
+  inicializando: true,
+  definirSessao: (usuario) => set({ usuario, inicializando: false }),
   sair: () => set({ usuario: null }),
 }))

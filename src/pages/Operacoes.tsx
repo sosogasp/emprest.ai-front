@@ -4,21 +4,23 @@ import { useToasts } from '@/store/toasts'
 import { Modal } from '@/components/Modal'
 import { Pill } from '@/components/Pill'
 import { Avatar } from '@/components/Avatar'
-import { useDemo, HOJE_DEMO, PESSOAS, type Emprestimo } from '@/data/demo'
+import { situacaoDoEquipamento, type Emprestimo } from '@/data/emprestimos'
+import { useDados, hoje } from '@/data/dados'
+import { EstadoDados } from '@/components/EstadoDados'
 import { estaAtrasado, formatarData } from '@/lib/format'
 
 /** Operações · empréstimos em aberto — layout.md §5.4, largura máxima 1320px. */
 export default function Operacoes() {
-  const { equipamentos, emprestimos, devolver } = useDemo()
+  const { equipamentos, emprestimos, pessoas, devolver, carregando, erro, refazer, salvando } = useDados()
   const mostrar = useToasts((s) => s.mostrar)
   const [busca, setBusca] = useState('')
   const [emDevolucao, setEmDevolucao] = useState<Emprestimo | null>(null)
 
   const item = (id: string) => equipamentos.find((e) => e.id === id)
-  const pessoa = (id: string) => PESSOAS.find((p) => p.id === id)
-  const emAtraso = (l: Emprestimo) => estaAtrasado(l.prazo, HOJE_DEMO)
+  const pessoa = (id: string) => pessoas.find((p) => p.id === id)
+  const emAtraso = (l: Emprestimo) => estaAtrasado(l.prazo, hoje())
   const disponiveis = equipamentos.filter(
-    (e) => !e.manutencao && !emprestimos.some((l) => l.equipamentoId === e.id),
+    (e) => situacaoDoEquipamento(e, emprestimos) === 'disponivel',
   ).length
   const manutencao = equipamentos.filter((e) => e.manutencao).length
 
@@ -31,12 +33,16 @@ export default function Operacoes() {
     return nomePessoa.includes(termo) || nomeItem.includes(termo)
   })
 
-  function aoDevolver() {
-    if (!emDevolucao) return
-    devolver(emDevolucao.id)
-    setEmDevolucao(null)
-    mostrar('Devolução registrada')
+  async function aoDevolver() {
+    if (!emDevolucao || salvando) return
+    try {
+      await devolver(emDevolucao.id)
+      setEmDevolucao(null)
+      mostrar('Devolução registrada')
+    } catch (error) { mostrar(error instanceof Error ? error.message : 'Não foi possível devolver') }
   }
+
+  if (carregando || erro) return <EstadoDados carregando={carregando} erro={erro} refazer={refazer} />
 
   return (
     <main style={{ padding: '36px 40px 64px', maxWidth: 1320, margin: '0 auto', width: '100%' }}>
