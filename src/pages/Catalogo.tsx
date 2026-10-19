@@ -5,18 +5,17 @@ import { useToasts } from '@/store/toasts'
 import { Modal } from '@/components/Modal'
 import { Pill } from '@/components/Pill'
 import {
-  useDemo,
-  HOJE_DEMO,
   PRAZO_PADRAO_DIAS,
   LIMITE_ITENS,
-  PESSOAS,
   situacaoDoEquipamento,
   emprestimoDoItem,
   emprestimosDe,
   temAtraso,
   type Equipamento,
   type Situacao,
-} from '@/data/demo'
+} from '@/data/emprestimos'
+import { useDados, hoje } from '@/data/dados'
+import { EstadoDados } from '@/components/EstadoDados'
 import { formatarData, somarDias } from '@/lib/format'
 
 type Filtro = 'todos' | 'disponivel' | 'emprestado' | 'manutencao'
@@ -31,17 +30,18 @@ const FILTROS: { chave: Filtro; rotulo: string }[] = [
 /** Catálogo — layout.md §5.2, largura máxima 1240px. */
 export default function Catalogo() {
   const usuario = useAuth((s) => s.usuario)!
-  const { equipamentos, emprestimos, solicitar } = useDemo()
+  const { equipamentos, emprestimos, ativos, pessoas, solicitar, carregando, erro, refazer, salvando } = useDados()
+  const hojeAtual = hoje()
   const mostrar = useToasts((s) => s.mostrar)
   const [busca, setBusca] = useState('')
   const [filtro, setFiltro] = useState<Filtro>('todos')
   const [paraSolicitar, setParaSolicitar] = useState<Equipamento | null>(null)
 
   const meus = emprestimosDe(usuario.id, emprestimos)
-  const bloqueadoPorAtraso = temAtraso(usuario.id, emprestimos)
+  const bloqueadoPorAtraso = temAtraso(usuario.id, emprestimos, hojeAtual)
   const noLimite = meus.length >= LIMITE_ITENS
 
-  const situacao = (item: Equipamento): Situacao => situacaoDoEquipamento(item, emprestimos)
+  const situacao = (item: Equipamento): Situacao => situacaoDoEquipamento(item, ativos)
   const disponiveis = equipamentos.filter((e) => situacao(e) === 'disponivel').length
 
   const termo = busca.trim().toLowerCase()
@@ -61,7 +61,7 @@ export default function Catalogo() {
     const sit = situacao(item)
     if (sit === 'manutencao')
       return { rotulo: 'Indisponível', desabilitado: true, classe: 'btn-secondary' }
-    const emprestimo = emprestimoDoItem(item, emprestimos)
+    const emprestimo = emprestimoDoItem(item, ativos)
     if (emprestimo) {
       if (emprestimo.pessoaId === usuario.id)
         return { rotulo: 'Está com você', desabilitado: true, classe: 'btn-secondary' }
@@ -77,20 +77,24 @@ export default function Catalogo() {
   function linhaDetalhe(item: Equipamento): string {
     const sit = situacao(item)
     if (sit === 'manutencao') return item.observacao ?? 'Em manutenção'
-    const emprestimo = emprestimoDoItem(item, emprestimos)
+    const emprestimo = emprestimoDoItem(item, ativos)
     if (!emprestimo) return 'Pronto para retirada no balcão'
     if (emprestimo.pessoaId === usuario.id)
       return `Com você · devolver até ${formatarData(emprestimo.prazo)}`
-    const pessoa = PESSOAS.find((p) => p.id === emprestimo.pessoaId)
+    const pessoa = pessoas.find((p) => p.id === emprestimo.pessoaId)
     return `Com ${pessoa?.nome ?? 'outra pessoa'} · devolver até ${formatarData(emprestimo.prazo)}`
   }
 
-  function confirmarSolicitacao() {
-    if (!paraSolicitar) return
-    solicitar(paraSolicitar.id, usuario.id, HOJE_DEMO)
-    setParaSolicitar(null)
-    mostrar('Empréstimo registrado')
+  async function confirmarSolicitacao() {
+    if (!paraSolicitar || salvando) return
+    try {
+      await solicitar(paraSolicitar.id)
+      setParaSolicitar(null)
+      mostrar('Empréstimo registrado')
+    } catch (error) { mostrar(error instanceof Error ? error.message : 'Não foi possível registrar') }
   }
+
+  if (carregando || erro) return <EstadoDados carregando={carregando} erro={erro} refazer={refazer} />
 
   return (
     <main style={{ padding: '36px 40px 64px', maxWidth: 1240, margin: '0 auto', width: '100%' }}>
@@ -183,10 +187,11 @@ export default function Catalogo() {
             { rotulo: 'Equipamento', valor: paraSolicitar.nome },
             {
               rotulo: 'Devolver até',
-              valor: formatarData(somarDias(HOJE_DEMO, PRAZO_PADRAO_DIAS)),
+              valor: formatarData(somarDias(hojeAtual, PRAZO_PADRAO_DIAS)),
             },
           ]}
           rotuloConfirmar="Confirmar empréstimo"
+          salvando={salvando}
           onConfirmar={confirmarSolicitacao}
           onFechar={() => setParaSolicitar(null)}
         />

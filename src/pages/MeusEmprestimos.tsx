@@ -4,13 +4,16 @@ import { useAuth } from '@/store/auth'
 import { useToasts } from '@/store/toasts'
 import { Modal } from '@/components/Modal'
 import { Pill } from '@/components/Pill'
-import { useDemo, HOJE_DEMO, LIMITE_ITENS, emprestimosDe, type Emprestimo } from '@/data/demo'
+import { LIMITE_ITENS, emprestimosDe, type Emprestimo } from '@/data/emprestimos'
+import { useDados, hoje } from '@/data/dados'
+import { EstadoDados } from '@/components/EstadoDados'
 import { estaAtrasado, formatarData } from '@/lib/format'
 
 /** Meus empréstimos — layout.md §5.3, largura máxima 1000px. */
 export default function MeusEmprestimos() {
   const usuario = useAuth((s) => s.usuario)!
-  const { equipamentos, emprestimos, devolver } = useDemo()
+  const { equipamentos, emprestimos, devolver, carregando, erro, refazer, salvando } = useDados()
+  const hojeAtual = hoje()
   const mostrar = useToasts((s) => s.mostrar)
   const [emDevolucao, setEmDevolucao] = useState<Emprestimo | null>(null)
 
@@ -20,12 +23,16 @@ export default function MeusEmprestimos() {
   const patrimonioDoItem = (id: string) =>
     equipamentos.find((e) => e.id === id)?.patrimonio ?? ''
 
-  function aoDevolver() {
-    if (!emDevolucao) return
-    devolver(emDevolucao.id)
-    setEmDevolucao(null)
-    mostrar('Devolução registrada')
+  async function aoDevolver() {
+    if (!emDevolucao || salvando) return
+    try {
+      await devolver(emDevolucao.id)
+      setEmDevolucao(null)
+      mostrar('Devolução registrada')
+    } catch (error) { mostrar(error instanceof Error ? error.message : 'Não foi possível devolver') }
   }
+
+  if (carregando || erro) return <EstadoDados carregando={carregando} erro={erro} refazer={refazer} />
 
   return (
     <main style={{ padding: '36px 40px 64px', maxWidth: 1000, margin: '0 auto', width: '100%' }}>
@@ -42,7 +49,7 @@ export default function MeusEmprestimos() {
       <div className="slots" style={{ marginTop: 22.4 }} aria-hidden="true">
         {Array.from({ length: LIMITE_ITENS }, (_, i) => {
           const emprestimo = meus[i]
-          const atrasado = emprestimo && estaAtrasado(emprestimo.prazo, HOJE_DEMO)
+          const atrasado = emprestimo && estaAtrasado(emprestimo.prazo, hojeAtual)
           return (
             <span
               key={i}
@@ -62,7 +69,7 @@ export default function MeusEmprestimos() {
           </div>
         ) : (
           meus.map((l) => {
-            const atrasado = estaAtrasado(l.prazo, HOJE_DEMO)
+            const atrasado = estaAtrasado(l.prazo, hojeAtual)
             return (
               <article key={l.id} className="loan-row" style={{ borderLeftColor: atrasado ? 'var(--state-late-fg)' : 'var(--state-ok-bd)' }}>
                 <div>
@@ -111,7 +118,7 @@ export default function MeusEmprestimos() {
           titulo="Devolver equipamento"
           resumo={[
             { rotulo: 'Equipamento', valor: nomeDoItem(emDevolucao.equipamentoId) },
-            { rotulo: 'Devolução em', valor: formatarData(HOJE_DEMO) },
+            { rotulo: 'Devolução em', valor: formatarData(hojeAtual) },
           ]}
           rotuloConfirmar="Confirmar devolução"
           onConfirmar={aoDevolver}

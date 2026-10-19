@@ -2,7 +2,8 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { useNavigate } from 'react-router-dom'
-import { useDemo, type Categoria } from '@/data/demo'
+import type { Categoria } from '@/data/emprestimos'
+import { useDados } from '@/data/dados'
 import { useToasts } from '@/store/toasts'
 
 const schema = z.object({
@@ -28,7 +29,7 @@ const FORA_DA_V1 = ['Reserva com data futura', 'Notificação por e-mail', 'Impo
 
 /** Cadastro de equipamentos (Operações) — layout.md §5.5, grade 1fr/300px. */
 export default function Equipamentos() {
-  const cadastrar = useDemo((s) => s.cadastrar)
+  const { cadastrar, salvando } = useDados()
   const mostrar = useToasts((s) => s.mostrar)
   const navigate = useNavigate()
 
@@ -41,8 +42,10 @@ export default function Equipamentos() {
     defaultValues: { nome: '', categoria: 'Notebook', patrimonio: '', observacao: '', manutencao: 'disponivel' },
   })
 
-  function aoCadastrar(valores: FormEquipamento) {
-    cadastrar({
+  async function aoCadastrar(valores: FormEquipamento) {
+    if (salvando) return
+    try {
+    await cadastrar({
       nome: valores.nome,
       categoria: valores.categoria,
       // patrimônio vazio cai para TI-— (regra 10)
@@ -52,6 +55,7 @@ export default function Equipamentos() {
     })
     mostrar('Equipamento cadastrado')
     void navigate('/operacoes')
+    } catch (error) { mostrar(error instanceof Error ? error.message : 'Não foi possível cadastrar') }
   }
 
   function aoFalhar() {

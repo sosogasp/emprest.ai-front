@@ -9,6 +9,7 @@ import Catalogo from '@/pages/Catalogo'
 import MeusEmprestimos from '@/pages/MeusEmprestimos'
 import Operacoes from '@/pages/Operacoes'
 import Equipamentos from '@/pages/Equipamentos'
+import { Sessao } from '@/components/Sessao'
 
 const queryClient = new QueryClient()
 
@@ -63,7 +64,7 @@ const router = createBrowserRouter([
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <Sessao><RouterProvider router={router} /></Sessao>
     </QueryClientProvider>
   )
 }
