@@ -9,6 +9,7 @@ PRD v1 itens 1 e 2, layout §§5.1–5.2 e ADR-001 (persistência, autenticaçã
 ## Regras
 - Usar os patrimônios, nomes, categorias e buscas da lista da prática. Seguir o briefing de dados para situação: TI-0004 e TI-0007 em manutenção, inclusive TI-0010 entre os dez disponíveis.
 - Usar exclusivamente a API do Pixabay, conforme orientação do professor em aula. Manter origem, autor e licença por foto, com revisão visual para pessoas, marcas, logotipos, textos e telas com conteúdo.
+- A responsável autorizou Pillow para preparação local e permitiu caracteres de teclado e rótulos técnicos usuais. Pessoas, marcas/logos legíveis, texto promocional e conteúdo em telas continuam proibidos. Recortes são registrados no manifesto e a aprovação visual incide sobre a imagem final.
 - A preparação e a verificação acontecem localmente. O responsável humano executa os uploads e a carga do deploy, com credenciais fora do repositório.
 - A conta indicada no briefing é exclusiva do professor. A carga cria zero empréstimos e preserva o histórico existente.
 
