@@ -24,9 +24,9 @@ references/selecoes.json registra as 12 seleções aprovadas visualmente. A resp
 TI-0007 usa um recorte registrado em pixels [350,160,900,480], escolhido pelo agente para excluir a faixa inferior com marca e os objetos laterais. O resultado mostra a tela e a moldura. A revisão visual incide sobre a saída, além da origem. Nenhum recorte é aplicado silenciosamente.
 
 python scripts/prepare.py references/selecoes.json CAMINHO_LOCAL/cache CAMINHO_LOCAL/originais CAMINHO_LOCAL/lote
-python scripts/pixabay.py validate CAMINHO_LOCAL/lote/manifest.json
+python scripts/pixabay.py validate CAMINHO_LOCAL/lote/manifest.json --originals CAMINHO_LOCAL/originais
 
-prepare.py preserva a proporção com margens brancas em PNG 800×600. Os arquivos locais incluem o hash no nome. Só troca o manifesto após validar o lote, mantendo a versão anterior íntegra em caso de falha. Repetir a mesma seleção preserva nomes, conteúdo e manifesto.
+prepare.py preserva a proporção com margens brancas em PNG 800×600. Os arquivos locais incluem o hash no nome. Prepara o lote inteiro em pasta temporária e só publica a pasta após validar. Repetir a mesma seleção preserva nomes, conteúdo e manifesto. Uma seleção diferente exige nova pasta de saída para preservar a anterior. Com --originals, o validador reproduz a transformação e compara os pixels normalizados pelo SHA-256.
 
 ## Manifesto e garantias
 O manifesto contém exatamente TI-0001 a TI-0012, ID Pixabay, origem, autor, licença, transformação, SHA-256 e chave estável de armazenamento por patrimônio. review registra aprovação, responsável, data e observações.
@@ -36,3 +36,6 @@ O validador verifica patrimônios, IDs e arquivos distintos, dimensões, decodif
 O lote fica em docs/specs/004-dados-iniciais/imagens/ do repositório frontend. Para cada registro do manifesto, envie o arquivo indicado por file ao bucket público usando exatamente storage_key, por exemplo equipamentos/TI-0001.png. Reutilize a mesma chave em reexecuções, sem criar cópias numeradas.
 O agente não executa upload. Estes scripts não possuem cliente Supabase, comando de publicação nem leitura de credenciais do deploy.
 Depois do upload, confira as 12 URLs públicas sem login, repetindo a checagem de dimensões. A configuração do bucket e o carregamento dos dados são etapas distintas da preparação local.
+## Regressões locais
+python scripts/test_workflow.py
+Sete casos sintéticos cobrem reexecução idêntica, ID repetido, revisão ausente, data inválida, recorte adulterado, dimensões inválidas e falha parcial preservando o lote anterior.

@@ -7,10 +7,12 @@ from pathlib import Path
 import re
 import struct
 import time
+from datetime import date
+from io import BytesIO
 import urllib.error
 import urllib.parse
 import urllib.request
-from PIL import Image
+from PIL import Image, ImageOps
 
 LICENSE = "https://pixabay.com/service/license-summary/"
 ASSETS = {f"TI-{number:04d}" for number in range(1, 13)}
@@ -58,7 +60,22 @@ def search(query, cache, order="popular", category=None, photo_id=None):
     return target
 
 
-def validate(manifest):
+def normalize(original, crop=None):
+    with Image.open(original) as source:
+        image = ImageOps.exif_transpose(source).convert('RGB')
+        if crop is not None:
+            if (not isinstance(crop, list) or len(crop) != 4
+                    or any(type(value) is not int for value in crop)
+                    or not (0 <= crop[0] < crop[2] <= image.width
+                            and 0 <= crop[1] < crop[3] <= image.height)):
+                raise ValueError('Recorte inválido.')
+            image = image.crop(tuple(crop))
+        encoded = BytesIO()
+        ImageOps.pad(image, (800, 600), color='white').save(encoded, format='PNG')
+        return encoded.getvalue()
+
+
+def validate(manifest, originals=None):
     rows = json.loads(manifest.read_text(encoding="utf-8"))
     if not isinstance(rows, list) or len(rows) != 12:
         raise ValueError("O manifesto precisa conter exatamente 12 equipamentos.")
@@ -88,15 +105,29 @@ def validate(manifest):
                 or data[12:16] != b"IHDR" or struct.unpack(">II", data[16:24]) != (800, 600)):
             raise ValueError(f"{asset}: PNG precisa ter 800×600.")
         with Image.open(image) as decoded:
-            decoded.verify()
+            decoded.load()
         digest = hashlib.sha256(data).hexdigest()
         if digest != row.get("sha256") or digest in hashes:
             raise ValueError(f"{asset}: hash incorreto ou imagem repetida.")
         hashes.add(digest)
+        transform = row.get('transform', {})
+        if transform.get('size') != [800, 600] or transform.get('fit') != 'pad':
+            raise ValueError(f'{asset}: transformação não corresponde ao contrato.')
+        crop = transform.get('crop')
+        if crop is not None and (not isinstance(crop, list) or len(crop) != 4
+                or any(type(value) is not int for value in crop)
+                or not (0 <= crop[0] < crop[2] and 0 <= crop[1] < crop[3])):
+            raise ValueError(f'{asset}: recorte inválido.')
+        if originals is not None:
+            expected = normalize(originals / f'{photo_id}.jpg', crop)
+            if hashlib.sha256(expected).hexdigest() != digest:
+                raise ValueError(f'{asset}: transformação não reproduz a imagem.')
         review = row.get("review", {})
-        if (review.get("approved") is not True or not review.get("reviewer")
-                or not review.get("date") or not review.get("notes")):
+        if (review.get("approved") is not True
+                or any(not isinstance(review.get(field), str) or not review[field].strip()
+                       for field in ('reviewer', 'date', 'notes'))):
             raise ValueError(f"{asset}: revisão visual não registrada.")
+        date.fromisoformat(review['date'])
     print("12 arquivos locais validados. Publicação e URLs públicas ainda exigem conferência separada.")
 
 
@@ -112,6 +143,7 @@ def main():
     by_id.add_argument("--cache", type=Path, required=True)
     check = commands.add_parser("validate")
     check.add_argument("manifest", type=Path)
+    check.add_argument('--originals', type=Path)
     args = parser.parse_args()
     try:
         if args.command == "search":
@@ -119,7 +151,7 @@ def main():
         elif args.command == "lookup":
             print(search("", args.cache, photo_id=args.photo_id))
         else:
-            validate(args.manifest)
+            validate(args.manifest, args.originals)
     except (ValueError, OSError, KeyError, TypeError) as error:
         parser.exit(1, str(error) + "\n")
 

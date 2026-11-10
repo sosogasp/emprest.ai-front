@@ -21,4 +21,4 @@ O responsável humano faz o upload ao bucket público com chaves estáveis por p
 
 Consulte references/operacao.md para comandos e manifesto. scripts/pixabay.py busca com cache de 24 horas e valida o lote. scripts/resize.py normaliza downloads selecionados para PNG 800×600 com Pillow, autorizado pela responsável. Guarde cache e fotos fora do repositório até aprovação visual.
 
-scripts/prepare.py monta o lote das seleções revisadas, registra recortes e mantém o manifesto anterior íntegro até validar a nova saída. Recortes devem preservar a identificação do equipamento e passar por revisão visual da saída. Não aprove a imagem com base apenas nos metadados ou no recorte solicitado.
+scripts/prepare.py monta o lote das seleções revisadas em uma pasta temporária, registra recortes e só publica a pasta após validar. Reexecutar preserva um lote idêntico; seleções diferentes exigem nova pasta. Recortes devem preservar a identificação do equipamento e passar por revisão visual da saída. Não aprove a imagem com base apenas nos metadados ou no recorte solicitado.

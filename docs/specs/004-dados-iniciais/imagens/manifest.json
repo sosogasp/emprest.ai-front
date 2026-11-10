@@ -156,7 +156,7 @@
       "approved": true,
       "reviewer": "Codex — inspeção visual",
       "date": "2026-11-10",
-      "notes": "Recorte da área da tela vazia antes da normalização; a faixa inferior com logotipo e os objetos com marcas ficam fora do resultado. Revisão visual da saída obrigatória."
+      "notes": "Revisão visual da saída realizada: recorte da área da tela vazia exclui a faixa inferior com logotipo e os objetos laterais. Sem pessoas, marcas/logos legíveis ou conteúdo na tela."
     },
     "transform": {
       "crop": [
