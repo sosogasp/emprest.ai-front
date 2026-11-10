@@ -1,0 +1,128 @@
+[
+  {
+    "patrimonio": "TI-0001",
+    "pixabay_id": 3036166,
+    "review": {
+      "approved": true,
+      "reviewer": "Codex — inspeção visual",
+      "date": "2026-11-10",
+      "notes": "Revisão visual do original e da saída normalizada: sem pessoas, marcas/logos legíveis, texto promocional ou conteúdo em telas. Caracteres de teclado e rótulos técnicos permitidos pela responsável em 2026-11-10."
+    }
+  },
+  {
+    "patrimonio": "TI-0002",
+    "pixabay_id": 791032,
+    "review": {
+      "approved": true,
+      "reviewer": "Codex — inspeção visual",
+      "date": "2026-11-10",
+      "notes": "Revisão visual do original e da saída normalizada: sem pessoas, marcas/logos legíveis, texto promocional ou conteúdo em telas. Caracteres de teclado e rótulos técnicos permitidos pela responsável em 2026-11-10."
+    }
+  },
+  {
+    "patrimonio": "TI-0003",
+    "pixabay_id": 785742,
+    "review": {
+      "approved": true,
+      "reviewer": "Codex — inspeção visual",
+      "date": "2026-11-10",
+      "notes": "Revisão visual do original e da saída normalizada: sem pessoas, marcas/logos legíveis, texto promocional ou conteúdo em telas. Caracteres de teclado e rótulos técnicos permitidos pela responsável em 2026-11-10."
+    }
+  },
+  {
+    "patrimonio": "TI-0004",
+    "pixabay_id": 6856557,
+    "review": {
+      "approved": true,
+      "reviewer": "Codex — inspeção visual",
+      "date": "2026-11-10",
+      "notes": "Revisão visual do original e da saída normalizada: sem pessoas, marcas/logos legíveis, texto promocional ou conteúdo em telas. Caracteres de teclado e rótulos técnicos permitidos pela responsável em 2026-11-10."
+    }
+  },
+  {
+    "patrimonio": "TI-0005",
+    "pixabay_id": 17894,
+    "review": {
+      "approved": true,
+      "reviewer": "Codex — inspeção visual",
+      "date": "2026-11-10",
+      "notes": "Revisão visual do original e da saída normalizada: sem pessoas, marcas/logos legíveis, texto promocional ou conteúdo em telas. Caracteres de teclado e rótulos técnicos permitidos pela responsável em 2026-11-10."
+    }
+  },
+  {
+    "patrimonio": "TI-0006",
+    "pixabay_id": 17768,
+    "review": {
+      "approved": true,
+      "reviewer": "Codex — inspeção visual",
+      "date": "2026-11-10",
+      "notes": "Revisão visual do original e da saída normalizada: sem pessoas, marcas/logos legíveis, texto promocional ou conteúdo em telas. Caracteres de teclado e rótulos técnicos permitidos pela responsável em 2026-11-10."
+    }
+  },
+  {
+    "patrimonio": "TI-0007",
+    "pixabay_id": 1868496,
+    "review": {
+      "approved": true,
+      "reviewer": "Codex — inspeção visual",
+      "date": "2026-11-10",
+      "notes": "Recorte da área da tela vazia antes da normalização; a faixa inferior com logotipo e os objetos com marcas ficam fora do resultado. Revisão visual da saída obrigatória."
+    },
+    "crop": [
+      350,
+      160,
+      900,
+      480
+    ]
+  },
+  {
+    "patrimonio": "TI-0008",
+    "pixabay_id": 1827,
+    "review": {
+      "approved": true,
+      "reviewer": "Codex — inspeção visual",
+      "date": "2026-11-10",
+      "notes": "Revisão visual do original e da saída normalizada: sem pessoas, marcas/logos legíveis, texto promocional ou conteúdo em telas. Caracteres de teclado e rótulos técnicos permitidos pela responsável em 2026-11-10."
+    }
+  },
+  {
+    "patrimonio": "TI-0009",
+    "pixabay_id": 4498743,
+    "review": {
+      "approved": true,
+      "reviewer": "Codex — inspeção visual",
+      "date": "2026-11-10",
+      "notes": "Revisão visual do original e da saída normalizada: sem pessoas, marcas/logos legíveis, texto promocional ou conteúdo em telas. Caracteres de teclado e rótulos técnicos permitidos pela responsável em 2026-11-10."
+    }
+  },
+  {
+    "patrimonio": "TI-0010",
+    "pixabay_id": 494647,
+    "review": {
+      "approved": true,
+      "reviewer": "Codex — inspeção visual",
+      "date": "2026-11-10",
+      "notes": "Revisão visual do original e da saída normalizada: sem pessoas, marcas/logos legíveis, texto promocional ou conteúdo em telas. Caracteres de teclado e rótulos técnicos permitidos pela responsável em 2026-11-10."
+    }
+  },
+  {
+    "patrimonio": "TI-0011",
+    "pixabay_id": 1219748,
+    "review": {
+      "approved": true,
+      "reviewer": "Codex — inspeção visual",
+      "date": "2026-11-10",
+      "notes": "Revisão visual do original e da saída normalizada: sem pessoas, marcas/logos legíveis, texto promocional ou conteúdo em telas. Caracteres de teclado e rótulos técnicos permitidos pela responsável em 2026-11-10."
+    }
+  },
+  {
+    "patrimonio": "TI-0012",
+    "pixabay_id": 551287,
+    "review": {
+      "approved": true,
+      "reviewer": "Codex — inspeção visual",
+      "date": "2026-11-10",
+      "notes": "Revisão visual do original e da saída normalizada: sem pessoas, marcas/logos legíveis, texto promocional ou conteúdo em telas. Caracteres de teclado e rótulos técnicos permitidos pela responsável em 2026-11-10."
+    }
+  }
+]
