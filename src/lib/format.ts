@@ -12,6 +12,17 @@ export function somarDias(iso: string, dias: number): string {
   return d.toISOString().slice(0, 10)
 }
 
+/** Prazo aprovado de empréstimo: dias de segunda a sexta, a partir do dia seguinte. */
+export function somarDiasUteis(iso: string, dias: number): string {
+  const prazo = new Date(`${iso}T00:00:00Z`)
+  let contados = 0
+  while (contados < dias) {
+    prazo.setUTCDate(prazo.getUTCDate() + 1)
+    if (prazo.getUTCDay() !== 0 && prazo.getUTCDay() !== 6) contados++
+  }
+  return prazo.toISOString().slice(0, 10)
+}
+
 /** Compara apenas o dia (as datas de exemplo não têm hora). */
 export function estaAtrasado(prazoISO: string, hojeISO: string): boolean {
   return prazoISO < hojeISO

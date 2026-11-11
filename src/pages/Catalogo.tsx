@@ -16,7 +16,7 @@ import {
 } from '@/data/emprestimos'
 import { useDados, hoje } from '@/data/dados'
 import { EstadoDados } from '@/components/EstadoDados'
-import { formatarData, somarDias } from '@/lib/format'
+import { formatarData, somarDiasUteis } from '@/lib/format'
 
 type Filtro = 'todos' | 'disponivel' | 'emprestado' | 'manutencao'
 
@@ -150,6 +150,16 @@ export default function Catalogo() {
           const botao = estadoDoBotao(item)
           return (
             <article className="card card-item" key={item.id}>
+              {item.imagemUrl && (
+                <img
+                  src={item.imagemUrl}
+                  alt={item.nome}
+                  loading="lazy"
+                  width={800}
+                  height={600}
+                  style={{ width: '100%', height: 'auto', aspectRatio: '4 / 3', objectFit: 'contain', borderRadius: 8, marginBottom: 16, background: '#fff' }}
+                />
+              )}
               <div style={{ display: 'flex', justifyContent: 'space-between', gap: 11.2 }}>
                 <div>
                   <p className="card-kicker">{item.categoria}</p>
@@ -179,6 +189,10 @@ export default function Catalogo() {
         )}
       </div>
 
+      <p style={{ marginTop: 16, fontSize: 12, color: 'var(--t45)' }}>
+        Fotos: <a href="https://pixabay.com/" target="_blank" rel="noreferrer">Pixabay</a>
+      </p>
+
       {paraSolicitar && (
         <Modal
           titulo="Solicitar empréstimo"
@@ -187,7 +201,7 @@ export default function Catalogo() {
             { rotulo: 'Equipamento', valor: paraSolicitar.nome },
             {
               rotulo: 'Devolver até',
-              valor: formatarData(somarDias(hojeAtual, PRAZO_PADRAO_DIAS)),
+              valor: formatarData(somarDiasUteis(hojeAtual, PRAZO_PADRAO_DIAS)),
             },
           ]}
           rotuloConfirmar="Confirmar empréstimo"
