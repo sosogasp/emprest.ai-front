@@ -60,6 +60,8 @@ export type EquipamentosDtoItensItem = {
   /** @nullable */
   observacao: string | null;
   /** @nullable */
+  imagemUrl: string | null;
+  /** @nullable */
   emprestimo: EquipamentosDtoItensItemEmprestimo;
 };
 
@@ -157,6 +159,8 @@ export interface EquipamentoDto {
   manutencao: boolean;
   /** @nullable */
   observacao: string | null;
+  /** @nullable */
+  imagemUrl: string | null;
   /** @nullable */
   emprestimo: EquipamentoDtoEmprestimo;
 }
