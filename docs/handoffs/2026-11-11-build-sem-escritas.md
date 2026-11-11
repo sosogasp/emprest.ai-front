@@ -18,3 +18,6 @@ Registrar o resultado do build e a revisão independente. Manter 005 CA-01 pende
 - ../backend/scripts/deploy.cjs
 - ENTREGA.md
 - docs/specs/005-solicitar-emprestimo/tasks.md
+
+## Complemento de revisão independente
+Revisões frontend 669811e / backend 369056a: verificador confirmou somente Prisma generate + Nest build no pipeline e evidências humanas registradas. Indicou harmonizar frases antigas de pendência; foram corrigidas no roteiro e relatório. 005 CA-01 segue sem evidência final; não foi integrada a branch na main. Branches foram publicadas para revisão, sem declarar a 005 pronta.

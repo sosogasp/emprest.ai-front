@@ -95,7 +95,7 @@ Revisões: frontend 340955c e backend 1286eb9. Rodada somente leitura: testes fo
 | 004 CA-03 | SEM EVIDÊNCIA final | Reexecução local coberta; repetição no ambiente final pendente |
 | 004 CA-04 | SEM EVIDÊNCIA final | Login docente e zero empréstimos pendentes |
 
-Resultado: NÃO PRONTA. O revisor encontrou o build de deploy executando migrations, seed e vínculo de contas automaticamente. A publicação foi pausada, pois isso contraria a execução humana exigida pela prática; a correção da configuração depende de aprovação. Também apontou rótulos sem “úteis” (corrigidos depois da revisão) e a necessidade de documentar o nome explícito no provisionamento. Alterações posteriores exigem nova rodada antes de integrar.
+Resultado: NÃO PRONTA. O revisor encontrou o build de deploy executando migrations, seed e vínculo de contas automaticamente. A publicação foi pausada, pois isso contraria a execução humana exigida pela prática; naquele momento a correção da configuração dependia de aprovação (posteriormente recebida; ver atualização final). Também apontou rótulos sem “úteis” (corrigidos depois da revisão) e a necessidade de documentar o nome explícito no provisionamento. Alterações posteriores exigem nova rodada antes de integrar.
 
 Verificações locais: backend com 34 testes em 7 suítes; frontend com 7 testes em 3 arquivos; lint, typecheck e build sem erros. Os quatro avisos de lint do cliente gerado e o aviso de bundle permanecem registrados.
 
@@ -110,7 +110,7 @@ A nova dependência de testes apresentou limitações de versão do Node e leitu
 ## 8. O que ficou de fora e o que faria diferente
 
 - A responsável confirmou em 11/11/2026 o login docente, zero empréstimos e a carga repetida com os mesmos 12 registros. São relatos humanos, sem leitura independente de produção pelo agente.
-- As operações manuais de produção são de responsabilidade da responsável. A revisão descobriu que o build existente também realizava escritas automaticamente; a publicação está pausada até resolver essa divergência, sem alegar conformidade histórica do pipeline.
+- As operações manuais de produção são de responsabilidade da responsável. A revisão descobriu que o build existente também realizava escritas automaticamente; o build foi corrigido após aprovação, sem alegar conformidade histórica do pipeline. A integração da 005 ainda depende do CA-01.
 - Feriados estaduais e municipais ficam para uma etapa posterior.
 - A criação de equipamentos pela interface não inclui seleção e preparação de novas fotos nesta entrega.
 - Há quatro avisos de lint no cliente gerado e um aviso de tamanho do bundle.
@@ -121,3 +121,21 @@ A nova dependência de testes apresentou limitações de versão do Node e leitu
 ## Atualização final — 11/11/2026
 A responsável confirmou os dois checks solicitados: login docente com zero empréstimos e duas cargas mantendo os mesmos 12 registros. Isso atende à evidência humana solicitada para 004 CA-01, CA-03 e CA-04; as linhas anteriores preservam o resultado histórico da rodada. A responsável aprovou explicitamente remover migrations, seed e vínculo do build. `backend/scripts/deploy.cjs` agora executa somente Prisma generate e Nest build; os comandos manuais permanecem disponíveis. Não houve execução de escrita remota pelo agente para essa correção.
 A confirmação do catálogo autenticado com as 12 fotos após publicação (005 CA-01) ainda deve ser feita. A entrega inclui essa pendência, sem declarar a spec 005 pronta. Os checks locais passaram (34 testes backend e 7 frontend), e a alteração do build foi validada sem credenciais de produção.
+
+
+### Resultado da última rodada independente
+Frontend 669811e / backend 369056a. O revisor não executou testes nem acessou produção.
+
+| Spec | CA | Resultado | Evidência |
+|---|---|---|---|
+| 004 | CA-01 | APROVADO | Confirmação humana dos 12 registros + teste da carga |
+| 004 | CA-02 | APROVADO | Manifesto e verificação pública das fotos |
+| 004 | CA-03 | APROVADO | Reexecução humana confirmada + testes de preservação |
+| 004 | CA-04 | APROVADO | Login docente e zero empréstimos confirmados |
+| 005 | CA-01 | SEM EVIDÊNCIA final | Falta conferência autenticada do catálogo com as 12 fotos |
+| 005 | CA-02 | APROVADO | Calendário e transação |
+| 005 | CA-03 | APROVADO | Limite três, atraso e concorrência |
+| 005 | CA-04 | APROVADO | Mesmo item concorrente: um empréstimo |
+| 005 | CA-05 | APROVADO | Isolamento e consulta própria |
+
+004 PRONTA; 005 NÃO PRONTA. Sem novo defeito funcional concreto identificado. As duas frases antigas de pendência apontadas pelo revisor foram harmonizadas antes do ZIP. Fontes e relatório publicados na branch da spec; sem integração na main enquanto falta o CA-01.
