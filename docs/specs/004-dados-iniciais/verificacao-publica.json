@@ -1,0 +1,138 @@
+{
+  "verified_on": "2026-11-10",
+  "method": "Unauthenticated HTTPS GET; PNG decoded with Pillow; SHA-256 compared to prepared manifest",
+  "results": [
+    {
+      "patrimonio": "TI-0001",
+      "url": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0001.png",
+      "http": 200,
+      "size": [
+        800,
+        600
+      ],
+      "sha256_matches": true,
+      "passed": true
+    },
+    {
+      "patrimonio": "TI-0002",
+      "url": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0002.png",
+      "http": 200,
+      "size": [
+        800,
+        600
+      ],
+      "sha256_matches": true,
+      "passed": true
+    },
+    {
+      "patrimonio": "TI-0003",
+      "url": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0003.png",
+      "http": 200,
+      "size": [
+        800,
+        600
+      ],
+      "sha256_matches": true,
+      "passed": true
+    },
+    {
+      "patrimonio": "TI-0004",
+      "url": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0004.png",
+      "http": 200,
+      "size": [
+        800,
+        600
+      ],
+      "sha256_matches": true,
+      "passed": true
+    },
+    {
+      "patrimonio": "TI-0005",
+      "url": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0005.png",
+      "http": 200,
+      "size": [
+        800,
+        600
+      ],
+      "sha256_matches": true,
+      "passed": true
+    },
+    {
+      "patrimonio": "TI-0006",
+      "url": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0006.png",
+      "http": 200,
+      "size": [
+        800,
+        600
+      ],
+      "sha256_matches": true,
+      "passed": true
+    },
+    {
+      "patrimonio": "TI-0007",
+      "url": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0007.png",
+      "http": 200,
+      "size": [
+        800,
+        600
+      ],
+      "sha256_matches": true,
+      "passed": true
+    },
+    {
+      "patrimonio": "TI-0008",
+      "url": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0008.png",
+      "http": 200,
+      "size": [
+        800,
+        600
+      ],
+      "sha256_matches": true,
+      "passed": true
+    },
+    {
+      "patrimonio": "TI-0009",
+      "url": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0009.png",
+      "http": 200,
+      "size": [
+        800,
+        600
+      ],
+      "sha256_matches": true,
+      "passed": true
+    },
+    {
+      "patrimonio": "TI-0010",
+      "url": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0010.png",
+      "http": 200,
+      "size": [
+        800,
+        600
+      ],
+      "sha256_matches": true,
+      "passed": true
+    },
+    {
+      "patrimonio": "TI-0011",
+      "url": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0011.png",
+      "http": 200,
+      "size": [
+        800,
+        600
+      ],
+      "sha256_matches": true,
+      "passed": true
+    },
+    {
+      "patrimonio": "TI-0012",
+      "url": "https://xcqsvcqjkogrchktrmgn.supabase.co/storage/v1/object/public/equipamentos/equipamentos/TI-0012.png",
+      "http": 200,
+      "size": [
+        800,
+        600
+      ],
+      "sha256_matches": true,
+      "passed": true
+    }
+  ]
+}
