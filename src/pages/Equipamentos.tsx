@@ -20,7 +20,7 @@ const CATEGORIAS: Categoria[] = ['Notebook', 'Monitor', 'Cabo', 'Câmera', 'Aces
 
 const REGRAS = [
   'Cada pessoa fica com no máximo 3 itens ao mesmo tempo',
-  'Prazo padrão de devolução de 14 dias',
+  'Prazo padrão de devolução de 14 dias úteis',
   'Item em atraso bloqueia novo empréstimo',
   'Equipamento em manutenção não aparece como disponível',
 ]

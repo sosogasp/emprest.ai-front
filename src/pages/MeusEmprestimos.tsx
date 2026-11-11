@@ -40,7 +40,7 @@ export default function MeusEmprestimos() {
         <div>
           <h1 className="page-title">Meus empréstimos</h1>
           <p className="page-lead">
-            {meus.length} de {LIMITE_ITENS} itens em seu nome · prazo padrão de 14 dias
+            {meus.length} de {LIMITE_ITENS} itens em seu nome · prazo padrão de 14 dias úteis
           </p>
         </div>
       </header>
@@ -109,7 +109,7 @@ export default function MeusEmprestimos() {
         }}
       >
         <span>Máximo de {LIMITE_ITENS} itens ao mesmo tempo</span>
-        <span>Prazo padrão de 14 dias</span>
+        <span>Prazo padrão de 14 dias úteis</span>
         <span>Item em atraso bloqueia novo empréstimo</span>
       </footer>
 
