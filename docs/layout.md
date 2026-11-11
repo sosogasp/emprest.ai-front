@@ -136,7 +136,7 @@ Input/select 36px (padding `6px 10px`) · botão padrão 36px · botão do login
 
 ### 5.1 Login
 Grade `1.05fr 0.95fr`, altura mínima 820px.
-- **Esquerda** (fundo `linear-gradient(160deg,#1b1f2e,#161826 60%)` + brilho radial `rgba(47,184,172,0.16)` de 520px, deslocado `left:-160px; top:120px`): marca no topo, título 44px em duas linhas, lead 16px em 60% de opacidade, e uma faixa de 3 estatísticas (`3 itens por pessoa`, `14 dias de prazo`, `0 linhas para preencher`) acima de uma borda superior; rodapé "Operações · TI interno" em 12px/40%.
+- **Esquerda** (fundo `linear-gradient(160deg,#1b1f2e,#161826 60%)` + brilho radial `rgba(47,184,172,0.16)` de 520px, deslocado `left:-160px; top:120px`): marca no topo, título 44px em duas linhas, lead 16px em 60% de opacidade, e uma faixa de 3 estatísticas (`3 itens por pessoa`, `14 dias úteis de prazo`, `0 linhas para preencher`) acima de uma borda superior; rodapé "Operações · TI interno" em 12px/40%.
 - **Direita**: coluna de 340px centralizada verticalmente — H2 "Entrar", lead, campo E-mail, campo Senha, botão primário `btn-block` (40px), botão ghost "Entrar como Operações →", nota "Cada pessoa vê apenas os próprios empréstimos".
 
 ### 5.2 Catálogo
@@ -145,7 +145,7 @@ Banner de bloqueio (condicional). Linha de chips de filtro: Todos · Disponívei
 Grade de cards. Card = kicker de categoria (uppercase 11px) · nome 16.5px · patrimônio 12px · pill de situação à direita · linha de detalhe (min-height 18px: "Pronto para retirada no balcão" / "Com {pessoa} · devolver até {data}" / observação de manutenção) · botão de largura total.
 
 ### 5.3 Meus empréstimos
-H1 + "N de 3 itens em seu nome · prazo padrão de 14 dias".
+H1 + "N de 3 itens em seu nome · prazo padrão de 14 dias úteis".
 Barra de 3 traços (ocupados no acento, atraso em vermelho, vazios em `text 12%`).
 Linhas de empréstimo com borda esquerda de 3px na cor do estado, em 5 colunas de flex: item (1.4) · Retirada (1) · Devolver até (1, na cor do estado) · pill (0.9) · botão "Devolver".
 Estado vazio: caixa tracejada, padding 48px, centralizada, com botão "Ir ao catálogo".
@@ -181,7 +181,7 @@ Grade `1fr 300px`, `gap: 34px`, alinhada ao topo.
 
 ## 7. Interações e regras de negócio
 
-1. **Solicitar empréstimo** (card disponível): abre modal com "Devolver até = hoje + 14 dias". Confirmar → item passa a `emprestado` com o nome da pessoa, sai do disponível, entra em Meus empréstimos e na tabela de Operações; toast de confirmação.
+1. **Solicitar empréstimo** (card disponível): abre modal com "Devolver até = hoje + 14 dias úteis (segunda a sexta)". Confirmar → item passa a `emprestado` com o nome da pessoa, sai do disponível, entra em Meus empréstimos e na tabela de Operações; toast de confirmação.
 2. **Devolver** (Meus empréstimos): modal "Devolução em {hoje}". Confirmar → item volta a `disponivel`, libera um slot, sai da tabela de Operações; toast.
 3. **Registrar devolução** (Operações, balcão): mesmo efeito, com "Pessoa" no lugar da data no resumo do modal.
 4. **Limite de 3 itens**: com 3 empréstimos ativos, todo botão de solicitar fica desabilitado com o rótulo "Limite de 3 itens" e vira `btn-secondary`.

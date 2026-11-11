@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import { emprestimosDe, situacaoDoEquipamento, temAtraso, type Equipamento, type Emprestimo } from './emprestimos'
 
-const equipamento: Equipamento = { id: 'e1', nome: 'Notebook', patrimonio: 'TI-1', categoria: 'Notebook', manutencao: false, observacao: null, emprestimo: null }
+const equipamento: Equipamento = { id: 'e1', nome: 'Notebook', patrimonio: 'TI-1', categoria: 'Notebook', manutencao: false, observacao: null, imagemUrl: null, emprestimo: null }
 const emprestimo: Emprestimo = { id: 'l1', equipamentoId: 'e1', pessoaId: 'u1', retirada: '2026-10-01', prazo: '2026-10-15', pessoa: { id: 'u1', nome: 'Pessoa', iniciais: 'P' } }
 
 describe('003 — dados reais', () => {

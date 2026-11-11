@@ -28,3 +28,5 @@ Os testes em prisma/carregar-equipamentos.spec.ts usam Testcontainers com postgr
 npm run test -- --runInBand
 
 Os casos cobrem dados e imagens, reexecução com empréstimo preexistente, isolamento de tenant, concorrência, tenant ausente e registro antigo sem imagem.
+## Conta docente: nome explícito
+Antes de executar o vínculo existente, informe `full_name` como `Marcelo Grilo` nos metadados da conta criada no Authentication. O script legado usa o prefixo do e-mail se esse campo faltar; essa alternativa não atende à decisão desta prática. Caso a conta já tenha sido vinculada, a responsável deve conferir e corrigir manualmente `usuarios.nome` no painel para `Marcelo Grilo`, pois uma nova execução do vínculo não atualiza esse nome. Não crie empréstimos com essa conta: valide login, acesso ao catálogo e a Operações e a ausência de empréstimos. Em 11/11/2026 a responsável confirmou login docente com zero empréstimos e duas cargas com os mesmos 12 registros; evidência humana registrada em ENTREGA.md.
