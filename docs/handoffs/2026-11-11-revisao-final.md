@@ -11,7 +11,7 @@ O verificador aprovou 005 CA-02–CA-05 e 004 CA-02; os demais carecem de confer
 A publicação foi pausada: scripts/deploy.cjs executa migrations, seed e vínculo de contas automaticamente. A regra da prática exige execução humana. Foi pedida aprovação para tornar o build exclusivamente geração de cliente e compilação; ainda não recebida. Não foi alterada configuração sem autorização.
 
 ## O que tentei e não funcionou
-A instalação de dependências na pasta sincronizada apresentou falhas de leitura. A cópia local de testes usa o mesmo lockfile e fontes, sem credenciais de produção. A única diferença restante era uma asserção de tipo removida do teste de repositório; a cópia foi sincronizada e o teste correspondente será repetido antes da prova definitiva.
+A instalação de dependências na pasta sincronizada apresentou falhas de leitura. A cópia local de testes usa o mesmo lockfile e fontes, sem credenciais de produção. A única diferença restante era uma asserção de tipo removida do teste de repositório; a cópia foi sincronizada e o teste correspondente passou novamente: “Tests: 4 passed, 4 total”.
 
 ## Próximo passo exato
 Após a aprovação, retirar de backend/scripts/deploy.cjs as etapas de escrita, verificar o build, sincronizar a cópia local de testes e repetir a verificação independente com os hashes finais. Até lá não integrar nem publicar. Confirmar login docente/zero empréstimos, dupla carga e catálogo autenticado antes de marcar as specs prontas. O ZIP final deve excluir credenciais, caches, dependências e arquivos de build.
