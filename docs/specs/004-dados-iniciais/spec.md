@@ -11,6 +11,7 @@ PRD v1 itens 1 e 2, layout §§5.1–5.2 e ADR-001 (persistência, autenticaçã
 - Usar exclusivamente a API do Pixabay, conforme orientação do professor em aula. Manter origem, autor e licença por foto, com revisão visual para pessoas, marcas, logotipos, textos e telas com conteúdo.
 - A responsável autorizou Pillow para preparação local e permitiu caracteres de teclado e rótulos técnicos usuais. Pessoas, marcas/logos legíveis, texto promocional e conteúdo em telas continuam proibidos. Recortes são registrados no manifesto e a aprovação visual incide sobre a imagem final.
 - A preparação e a verificação acontecem localmente. O responsável humano executa os uploads e a carga do deploy, com credenciais fora do repositório.
+- A responsável pediu acesso tanto de colaborador quanto de Operações para o professor. O papel existente OPERACOES já inclui empréstimos e gestão; ele será usado para essa conta. O nome é informado explicitamente no provisionamento, sem dedução do e-mail. A criação no Auth e o vínculo no deploy são executados pela responsável, com senha informada no painel.
 - A conta indicada no briefing é exclusiva do professor. A carga cria zero empréstimos e preserva o histórico existente.
 
 ## Critérios de aceitação
