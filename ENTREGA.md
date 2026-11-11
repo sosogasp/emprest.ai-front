@@ -1,6 +1,6 @@
 # Entrega da prática — emprest.ai
 
-Estado: revisão final registrada; conferência visual autenticada do catálogo após publicação permanece pendente. Este relatório distingue implementação, testes locais e comprovação em produção.
+Estado: conferência final do catálogo confirmada pela responsável em 11/11/2026; ver encerramento abaixo. Este relatório distingue implementação, testes locais e comprovação em produção.
 
 ## Links
 - Frontend: https://github.com/sosogasp/emprest.ai-front
@@ -139,3 +139,21 @@ Frontend 669811e / backend 369056a. O revisor não executou testes nem acessou p
 | 005 | CA-05 | APROVADO | Isolamento e consulta própria |
 
 004 PRONTA; 005 NÃO PRONTA. Sem novo defeito funcional concreto identificado. As duas frases antigas de pendência apontadas pelo revisor foram harmonizadas antes do ZIP. Fontes e relatório publicados na branch da spec; sem integração na main enquanto falta o CA-01.
+
+
+## Encerramento — confirmação após publicação
+Em 11/11/2026, a responsável confirmou que as 12 fotos aparecem no catálogo autenticado após integrar as duas branches. É confirmação humana, sem alegar login independente do agente. O frontend público respondeu HTTP 200 e serviu o bundle index-CB4ky8I_.js contendo imagemUrl, crédito Pixabay e texto de dias úteis. As revisões integradas são frontend 3284fdb e backend 739f1c2. Essa confirmação resolve a pendência de 005 CA-01; tabelas anteriores preservam os resultados históricos das rodadas.
+
+
+### Verificação independente de encerramento
+Frontend 3284fdb / backend 739f1c2 (origin/main). Rodada somente leitura, sem execução de testes ou login independente em produção.
+
+| CA — 005 | Resultado | Evidência |
+|---|---|---|
+| CA-01 | APROVADO | Confirmação humana das 12 fotos no catálogo autenticado + implementação e recusas revisadas |
+| CA-02 | APROVADO | Calendário e transação da revisão anterior |
+| CA-03 | APROVADO | Limite três, atraso e concorrência da revisão anterior |
+| CA-04 | APROVADO | Concorrência pelo mesmo item da revisão anterior |
+| CA-05 | APROVADO | Consulta própria e isolamento da revisão anterior |
+
+Resultado: spec 005 PRONTA. Spec 004 já aprovada. As pendências mencionadas nas rodadas históricas acima foram resolvidas pelas confirmações e correções registradas. Feriados e demais exclusões de escopo permanecem conforme as decisões de produto.
