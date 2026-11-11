@@ -181,7 +181,7 @@ Grade `1fr 300px`, `gap: 34px`, alinhada ao topo.
 
 ## 7. Interações e regras de negócio
 
-1. **Solicitar empréstimo** (card disponível): abre modal com "Devolver até = hoje + 14 dias". Confirmar → item passa a `emprestado` com o nome da pessoa, sai do disponível, entra em Meus empréstimos e na tabela de Operações; toast de confirmação.
+1. **Solicitar empréstimo** (card disponível): abre modal com "Devolver até = hoje + 14 dias úteis (segunda a sexta)". Confirmar → item passa a `emprestado` com o nome da pessoa, sai do disponível, entra em Meus empréstimos e na tabela de Operações; toast de confirmação.
 2. **Devolver** (Meus empréstimos): modal "Devolução em {hoje}". Confirmar → item volta a `disponivel`, libera um slot, sai da tabela de Operações; toast.
 3. **Registrar devolução** (Operações, balcão): mesmo efeito, com "Pessoa" no lugar da data no resumo do modal.
 4. **Limite de 3 itens**: com 3 empréstimos ativos, todo botão de solicitar fica desabilitado com o rótulo "Limite de 3 itens" e vira `btn-secondary`.

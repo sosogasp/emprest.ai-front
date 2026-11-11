@@ -4,7 +4,7 @@
 Permitir que o colaborador solicite equipamento disponível e acompanhe seus empréstimos em aberto.
 
 ## Vínculo
-PRD v1 itens 1–3, layout §§5.2, 5.3, 6 e 7, ADR-001 (REST, Prisma e isolamento por tenant) e ADR-003 (design system).
+PRD v1 itens 1–3, layout §§5.2, 5.3, 6 e 7, ADR-001 (REST, Prisma e isolamento por tenant) e proposta ADR-003 (referência de design ainda pendente de aceite; o layout vigente orienta esta implementação).
 
 ## Regras
 - Depende da carga 004. A confirmação cria o empréstimo na hora, sem aprovação ou fila.
@@ -27,7 +27,7 @@ Devolução, tela de Operações, reservas futuras, e-mails, renovação e calen
 Contrato REST do catálogo, criação de empréstimo, consulta de empréstimos próprios e erros de regra de negócio.
 
 ## Dívida de processo
-O limite de três itens segue a decisão mais recente da responsável de manter o PRD original. A proposta anterior de cinco não foi implementada. O layout ainda cita prazo de 14 dias corridos. Alinhar as instruções vigentes ao PRD durante a fatia. A data de referência deve seguir a convenção existente de datas do app. Se não houver convenção, definir o fuso com a responsável antes da implementação.
+O limite de três itens segue a decisão mais recente da responsável de manter o PRD original. A proposta anterior de cinco não foi implementada. O layout foi alinhado ao prazo aprovado. A data de referência usa America/Sao_Paulo, conforme a convenção já implementada na spec 003.
 
 ## Como sei que funcionou
 Testes de integração para as recusas, concorrência e isolamento, verificação do calendário e conferência da interface com uma conta de teste. O verificador registra evidência por CA.
