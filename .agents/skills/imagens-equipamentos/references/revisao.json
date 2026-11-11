@@ -1,0 +1,50 @@
+{
+  "review_date": "2026-11-10",
+  "scope": "Exemplos de rejeições efetivamente verificadas, sem alegar contagem total dos resultados da API",
+  "rejected": [
+    {
+      "pixabay_id": 886462,
+      "reason": "Logotipo Windows legível"
+    },
+    {
+      "pixabay_id": 620822,
+      "reason": "Pessoas e mãos na cena"
+    },
+    {
+      "pixabay_id": 2620118,
+      "reason": "Conteúdo de código na tela"
+    },
+    {
+      "pixabay_id": 924920,
+      "reason": "Conteúdo de código na tela"
+    },
+    {
+      "pixabay_id": 1853259,
+      "reason": "Logotipo Apple legível"
+    },
+    {
+      "pixabay_id": 541213,
+      "reason": "Marca Olympus legível"
+    },
+    {
+      "pixabay_id": 1362419,
+      "reason": "Marca Fujifilm legível"
+    },
+    {
+      "pixabay_id": 593327,
+      "reason": "Marca e texto promocional na caneta"
+    },
+    {
+      "pixabay_id": 1140699,
+      "reason": "Logotipos Apple no monitor e no mouse"
+    },
+    {
+      "pixabay_id": 5050543,
+      "reason": "Marca no painel inferior do monitor"
+    },
+    {
+      "pixabay_id": 7066188,
+      "reason": "Conector micro-USB não corresponde ao cabo USB-C"
+    }
+  ]
+}
