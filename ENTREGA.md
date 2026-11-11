@@ -1,6 +1,6 @@
 # Entrega da prática — emprest.ai
 
-Estado: revisão final em andamento. Este relatório distingue implementação, testes locais e comprovação em produção.
+Estado: revisão final registrada; conferência visual autenticada do catálogo após publicação permanece pendente. Este relatório distingue implementação, testes locais e comprovação em produção.
 
 ## Links
 - Frontend: https://github.com/sosogasp/emprest.ai-front
@@ -109,7 +109,7 @@ A nova dependência de testes apresentou limitações de versão do Node e leitu
 
 ## 8. O que ficou de fora e o que faria diferente
 
-- Confirmação humana do login docente e de zero empréstimos ainda aguarda registro.
+- A responsável confirmou em 11/11/2026 o login docente, zero empréstimos e a carga repetida com os mesmos 12 registros. São relatos humanos, sem leitura independente de produção pelo agente.
 - As operações manuais de produção são de responsabilidade da responsável. A revisão descobriu que o build existente também realizava escritas automaticamente; a publicação está pausada até resolver essa divergência, sem alegar conformidade histórica do pipeline.
 - Feriados estaduais e municipais ficam para uma etapa posterior.
 - A criação de equipamentos pela interface não inclui seleção e preparação de novas fotos nesta entrega.
@@ -117,3 +117,7 @@ A nova dependência de testes apresentou limitações de versão do Node e leitu
 - Alguns documentos antigos já estavam fora do controle de versão quando esta continuação começou. Foram importados como referências existentes para o pacote e o repositório; isso não comprova que foram escritos antes do código antigo.
 - ADR-003 já existia como proposta e continua pendente de aceite formal. A interface segue o layout vigente, sem tratar essa proposta como uma decisão aprovada.
 - As pendências serão mantidas visíveis no pacote final. A spec só será marcada pronta quando todos os CAs tiverem evidência.
+
+## Atualização final — 11/11/2026
+A responsável confirmou os dois checks solicitados: login docente com zero empréstimos e duas cargas mantendo os mesmos 12 registros. Isso atende à evidência humana solicitada para 004 CA-01, CA-03 e CA-04; as linhas anteriores preservam o resultado histórico da rodada. A responsável aprovou explicitamente remover migrations, seed e vínculo do build. `backend/scripts/deploy.cjs` agora executa somente Prisma generate e Nest build; os comandos manuais permanecem disponíveis. Não houve execução de escrita remota pelo agente para essa correção.
+A confirmação do catálogo autenticado com as 12 fotos após publicação (005 CA-01) ainda deve ser feita. A entrega inclui essa pendência, sem declarar a spec 005 pronta. Os checks locais passaram (34 testes backend e 7 frontend), e a alteração do build foi validada sem credenciais de produção.
